@@ -2,4 +2,4 @@
 
 Created with [Leaflet.js](http://leafletjs.com/).
 
-Data is from [NYC Open Data](http://insideairbnb.com/get-the-data.html).
+Data is from [Inside Airbnb](http://insideairbnb.com/get-the-data.html).

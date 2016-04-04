@@ -1,0 +1,15 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html, body, #map {
+  height: 100%;
+}
+
+#neighbourhood {
+  position: absolute;
+  width: 250px;
+  right: 30px;
+  top: 30px;
+}

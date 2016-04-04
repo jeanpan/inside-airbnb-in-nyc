@@ -13,3 +13,11 @@ html, body, #map {
   right: 30px;
   top: 30px;
 }
+
+p.name {
+  font-weight: bold;
+}
+
+p.price {
+  color: red;
+}

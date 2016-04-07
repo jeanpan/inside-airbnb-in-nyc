@@ -21,9 +21,10 @@
   var $select = $('#neighbourhood');
 
   $.getJSON(url).done(function(data) {
-    var options = "";
+    var options = "",
+        list = data.rows.sort(sortCompare);
 
-    data.rows.forEach(function(obj) {
+    list.forEach(function(obj) {
       var option = "<option value='" + obj.neighbourhood + "'>" + obj.neighbourhood + "</option>"
       options = options + option;
     });
@@ -81,6 +82,16 @@
       map.fitBounds(airbnbGeoJson.getBounds());
 
     });
+  }
+
+  // sort object array by neighbourhood name
+  function sortCompare(a, b) {
+    if (a.neighbourhood < b.neighbourhood)
+      return -1;
+    else if (a.neighbourhood > b.neighbourhood)
+      return 1;
+    else
+      return 0;
   }
 
 })();

@@ -21,3 +21,17 @@ p.name {
 p.price {
   color: red;
 }
+
+/* Custom popup */
+.leaflet-popup-tip {
+  /* background-color: yellow; */
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0;
+  /* border: 3px solid yellow; */
+}
+
+.leaflet-popup-content {
+  margin: 20px;
+}

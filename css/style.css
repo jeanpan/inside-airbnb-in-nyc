@@ -142,3 +142,11 @@ p.price {
 .leaflet-container .leaflet-control-attribution {
   background: transparent;
 }
+
+.leaflet-bar a:first-child, .leaflet-bar a:last-child {
+  border-radius: 0;
+}
+
+.leaflet-bar a.leaflet-pelias-search-icon {
+  border-radius: 0;
+}

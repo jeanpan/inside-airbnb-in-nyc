@@ -1,17 +1,106 @@
 body {
   padding: 0;
   margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-html, body, #map {
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+html, body, #container, #map, #aside {
   height: 100%;
 }
 
-#neighbourhood {
+#container, #header, #content {
+  width: 100%;
+}
+
+#header {
+  background: #000;
+  height: 10%;
+  position: relative;
+}
+
+#content {
+  height: 90%;
+  /* Get rid of the white space between two inline-block. */
+  /*
+  font-size: 0;
+  */
+}
+
+#map, #aside {
+  display: inline-block;
+}
+
+#map {
+  width: 70%;
+  float: left;
+}
+
+#aside {
+  width: 30%;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 30px;
+}
+
+.title {
+  text-transform: uppercase;
+  font-size: 400%;
+  color: #fff;
+  margin: 0;
   position: absolute;
+  bottom: -10px;
+  font-weight: bold;
+  letter-spacing: -2px;
+  box-sizing: border-box;
+  padding: 0 50px;
+}
+
+.desc {
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 30px;
+}
+
+.desc a {
+  color: #ffff00;
+}
+
+.boroughs li {
+  margin: 10px 0;
+  width: 100%;
+  height: 50px;
+}
+
+.boroughs li a {
+  background: #ffff00;
+  display: block;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 150%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.boroughs li a:hover {
+  background: #A1A6B4;
+}
+
+#neighbourhood {
+  /* position: absolute; */
   width: 250px;
   right: 30px;
-  top: 30px;
+  /* top: 30px; */
 }
 
 p.name {
@@ -20,6 +109,16 @@ p.name {
 
 p.price {
   color: red;
+}
+
+.leaflet-bar {
+  box-shadow: 0 0;
+  /* border: 1px solid #000; */
+  border-radius: 0;
+}
+
+.leaflet-bar a {
+  background-color: #ffff00;
 }
 
 /* Custom popup */
@@ -34,4 +133,12 @@ p.price {
 
 .leaflet-popup-content {
   margin: 20px;
+}
+
+.leaflet-control-attribution, .leaflet-control-scale-line {
+  color: #fff;
+}
+
+.leaflet-container .leaflet-control-attribution {
+  background: transparent;
 }

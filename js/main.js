@@ -4,14 +4,25 @@
   var map = L.map('map').setView([40.71, -73.93], 11),
       airbnbGeoJson = '';
 
-  var CartoDBTiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+  var CartoDBTiles = L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
     attribution: 'Map Data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> Contributors, Map Tiles &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
   });
 
   map.addLayer(CartoDBTiles);
 
+  L.control.geocoder('search-BCXXM8y').addTo(map);
+
   var dataLayer = L.geoJson().addTo(map);
 
+  $('.boroughs').on('click', 'li', function(event) {
+    event.preventDefault();
+    var query = "SELECT * FROM table_29 WHERE neighbourhood_group = '" + $(this).text() + "'";
+
+    plotData2Map(query);
+  });
+
+  /* Getting neighbourhood list from Brooklyn */
+  /*
   var param = $.param({
     q: "SELECT neighbourhood FROM table_29 WHERE neighbourhood_group = 'Brooklyn' GROUP BY neighbourhood"
   });
@@ -31,16 +42,17 @@
 
     $select.append(options);
 
-    plotData2Map($select.val());
+    // plotData2Map($select.val());
   });
 
   $select.on('change', function(){;
     plotData2Map($(this).val());
   });
+  */
 
-  function plotData2Map(value) {
+  function plotData2Map(query) {
     var param = $.param({
-      q: "SELECT * FROM table_29 WHERE neighbourhood_group = 'Brooklyn' and neighbourhood = '" + value + "'",
+      q: query,
       format: "GeoJSON"
     });
 
@@ -56,8 +68,8 @@
         var price = feature.properties.price,
             pointMarker = L.circleMarker(latlng, {
               stroke: false,
-              fillColor: '#3EC300',
-              fillOpacity: 0.7,
+              fillColor: '#ffff00',
+              fillOpacity: 0.9,
               radius: 6
             });
 

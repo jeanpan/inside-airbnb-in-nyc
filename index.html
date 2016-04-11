@@ -9,22 +9,51 @@
   <link type="text/css" rel="stylesheet" href="libraries/bootstrap/css/bootstrap.min.css"/>
   <!-- Including Leaflet CSS -->
   <link type="text/css" rel="stylesheet" href="libraries/leaflet/leaflet.css"/>
+  <!-- Load geocoding plugin after Leaflet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.4.1/leaflet-geocoder-mapzen.css">
   <!-- Including custom CSS -->
   <link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+
 </head>
 
 <body>
 
-  <div id="map"></div>
+  <div id="container">
 
-  <select id="neighbourhood" class="form-control">
-  </select>
+    <div id="header">
+      <h1 class="title">Airbnb in NYC</h1>
+      <p class="desc">Source data <a href="http://insideairbnb.com/">Inside Airbnb</a>. Powered by <a href="http://leafletjs.com/">Leaflet</a> & <a href="https://mapzen.com/projects/search/?lng=-73.99069&lat=40.69444&zoom=12">Mapzen Serach</a>.</p>
+    </div>
+
+    <div id="content">
+
+      <div id="map"></div>
+      <div id="aside">
+        <p>Select boroughs</p>
+        <ul class="boroughs">
+          <li><a href="">Manhattan</a></li>
+          <li><a href="">Bronx</a></li>
+          <li><a href="">Queens</a></li>
+          <li><a href="">Brooklyn</a></li>
+          <li><a href="">Staten Island</a></li>
+        </ul>
+        <!--
+        <select id="neighbourhood" class="form-control">
+          <option value=""></option>
+        </select>
+        -->
+      </div>
+
+    </div>
+
+  </div>
 
 </body>
 
 <script type="text/javascript" src="libraries/jquery/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="libraries/leaflet/leaflet.js"></script>
-<script type="text/javascript" src="libraries/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.4.1/leaflet-geocoder-mapzen.js"></script>
 
 <script type="text/javascript" src="js/main.js"></script>
 

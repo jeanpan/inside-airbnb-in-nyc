@@ -28,6 +28,7 @@ html, body, #container, #map, #aside {
 }
 
 #content {
+  display: relative;
   height: 90%;
   /* Get rid of the white space between two inline-block. */
   /*
@@ -103,6 +104,14 @@ html, body, #container, #map, #aside {
   /* top: 30px; */
 }
 
+#loading {
+  display: none;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  bottom: 0;
+}
+
 p.name {
   font-weight: bold;
 }
@@ -149,4 +158,10 @@ p.price {
 
 .leaflet-bar a.leaflet-pelias-search-icon {
   border-radius: 0;
+}
+
+.leaflet-control-loading,
+.leaflet-control-zoom a.leaflet-control-loading ,
+.leaflet-control-zoomslider a.leaflet-control-loading {
+  background-color: #fff;
 }

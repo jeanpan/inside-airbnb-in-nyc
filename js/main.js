@@ -12,6 +12,14 @@
 
   L.control.geocoder('search-BCXXM8y').addTo(map);
 
+  var loadingControl = L.Control.loading({
+      separate: true
+  });
+
+  map.addControl(loadingControl);
+
+
+
   var dataLayer = L.geoJson().addTo(map);
 
   $('.boroughs').on('click', 'li', function(event) {
@@ -58,6 +66,8 @@
 
     var url = "https://jeanpan.cartodb.com/api/v2/sql?" + param;
 
+    map.fire('dataloading');
+
     $.getJSON(url).done(function(data){
       // clean the layer
       map.removeLayer(airbnbGeoJson);
@@ -92,6 +102,8 @@
       }).addTo(map);
 
       map.fitBounds(airbnbGeoJson.getBounds());
+
+      map.fire('dataload');
 
     });
   }

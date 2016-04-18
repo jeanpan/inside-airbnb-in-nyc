@@ -1,7 +1,8 @@
 (function(){
   "use strict";
 
-  var map = L.map('map').setView([40.71, -73.93], 11),
+  var map = L.map('map').setView([40.71, -73.93], 12),
+      geocoder = L.control.geocoder('search-BCXXM8y').addTo(map),
       airbnbGeoJson = '';
 
   var CartoDBTiles = L.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
@@ -10,16 +11,13 @@
 
   map.addLayer(CartoDBTiles);
 
-  L.control.geocoder('search-BCXXM8y').addTo(map);
-
+  // Loading spin
   var loadingControl = L.Control.loading({
       separate: true
   });
-
   map.addControl(loadingControl);
 
-
-
+  // Add empty data to layer
   var dataLayer = L.geoJson().addTo(map);
 
   $('.boroughs').on('click', 'li', function(event) {
@@ -27,6 +25,29 @@
     var query = "SELECT * FROM table_29 WHERE neighbourhood_group = '" + $(this).text() + "'";
 
     plotData2Map(query);
+  });
+
+  geocoder.on('select', function (e) {
+    var coordinates = e.feature.geometry.coordinates;
+    // Zoom in according to the search result
+    map.setView([coordinates[1], coordinates[0]], 17);
+
+    var box = map.getBounds(),
+        northEast = box._northEast,
+        southWest = box._southWest;
+
+    // Bounding box query
+    var query = "SELECT * FROM table_29 WHERE the_geom && ST_SetSRID(ST_MakeBox2D(ST_Point(" + northEast.lng + ", " + northEast.lat + "), ST_Point(" + southWest.lng + ", " + southWest.lat + ")), 4326)";
+
+    // Within query
+    // var latlng = coordinates[1] + "," + coordinates[0];
+    // var query = "SELECT * FROM table_29 WHERE ST_DWithin(the_geom_webmercator, ST_Transform(CDB_LatLng(" + latlng + "), 3857), 2000)";
+    plotData2Map(query);
+  });
+
+  geocoder.on('reset', function(e) {
+    map.removeLayer(airbnbGeoJson);
+    map.setView([40.71, -73.93], 12);
   });
 
   /* Getting neighbourhood list from Brooklyn */
@@ -66,10 +87,12 @@
 
     var url = "https://jeanpan.cartodb.com/api/v2/sql?" + param;
 
+    console.log(url);
+
     map.fire('dataloading');
 
     $.getJSON(url).done(function(data){
-      // clean the layer
+      // Clean the layer
       map.removeLayer(airbnbGeoJson);
 
       var airbnbData = data;
@@ -108,7 +131,7 @@
     });
   }
 
-  // sort object array by neighbourhood name
+  // Sort object array by neighbourhood name
   function sortCompare(a, b) {
     if (a.neighbourhood < b.neighbourhood)
       return -1;

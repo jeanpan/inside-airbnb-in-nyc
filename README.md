@@ -1,4 +1,4 @@
-# [Inside Airbnb in NYC](http://jeanpan.github.io/Inside-Airbnb-in-Brooklyn/)
+# [Inside Airbnb in NYC](http://jeanpan.github.io/inside-airbnb-in-nyc/)
 
 Created with [Leaflet.js](http://leafletjs.com/).
 
